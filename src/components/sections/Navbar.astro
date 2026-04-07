@@ -1,0 +1,142 @@
+---
+import { InteractiveSidebar } from '../islands/InteractiveSidebar';
+const links = [
+  { href: '#about', label: 'Sobre Mi', i18nKey: 'nav.about' },
+  { href: '#experience', label: 'Experiencia', i18nKey: 'nav.experience' },
+  { href: '#projects', label: 'Proyectos', i18nKey: 'nav.projects' },
+  { href: '#skills', label: 'Habilidades', i18nKey: 'nav.skills' },
+  { href: '#contact', label: 'Contacto', i18nKey: 'nav.contact' },
+];
+---
+
+<header class="navbar-shell relative z-50">
+  <nav id="top" aria-label="Navegación principal" data-i18n-aria="nav.aria.primary" class="navbar-fixed fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(1120px,80%)] flex justify-between items-center gap-4 glass-panel animate-fade-down">
+    <a class="text-xl sm:text-2xl hidden sm:inline" href="#hero">
+      <span class="text-secondary">{'<'}</span>
+
+      <span class="font-bold italic">JD</span>
+      <span class="text-secondary">{'/>'}</span>
+    </a>
+
+    <ul class="gap-8 justify-center items-center hidden lg:flex">
+      {links.map((link) => (
+        <li>
+          <a class="nav-link" href={link.href} data-i18n={link.i18nKey}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center">
+      <!-- Switch Language -->
+      <button
+        id="lang-toggle"
+        type="button"
+        class="btn-outline py-2 px-3 text-sm"
+        aria-label="Cambiar idioma"
+        data-i18n-aria="nav.langToggle.aria"
+      >
+        EN
+      </button>
+    </div>
+    <!-- Toggle Sidebar -->
+    <InteractiveSidebar client:visible links={links}  />
+
+  </nav>
+</header>
+
+<script is:inline>
+  const setupNavbarScrollSpy = () => {
+    const nav = document.getElementById('top');
+    const navLinks = Array.from(document.querySelectorAll('a.nav-link[href^="#"]'));
+    const sections = navLinks
+      .map((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (!id) return null;
+        const section = document.getElementById(id);
+        return section ? { id, section, link } : null;
+      })
+      .filter(Boolean);
+
+    const getActivationOffset = () => {
+      const firstSection = sections[0]?.section;
+      if (!firstSection) return 0;
+      const scrollMarginTop = Number.parseFloat(getComputedStyle(firstSection).scrollMarginTop || '0');
+      return Number.isNaN(scrollMarginTop) ? 0 : scrollMarginTop;
+    };
+
+    const applyActiveState = (activeId) => {
+      for (const item of sections) {
+        const isActive = Boolean(activeId && item.id === activeId);
+        item.link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          item.link.setAttribute('aria-current', 'true');
+        } else {
+          item.link.removeAttribute('aria-current');
+        }
+      }
+    };
+
+    const setActiveLink = () => {
+      if (!sections.length) return;
+
+      const activationOffset = getActivationOffset();
+      const y = window.scrollY + activationOffset;
+      const viewportBottom = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Si estamos al final del documento, activa siempre la última sección
+      if (viewportBottom >= documentHeight - 2) {
+        applyActiveState(sections[sections.length - 1]?.id ?? null);
+        return;
+      }
+
+      let current = null;
+      for (const item of sections) {
+        const top = item.section.offsetTop;
+        const bottom = top + item.section.offsetHeight;
+
+        if (y >= top) current = item;
+        if (y >= top && y < bottom) {
+          current = item;
+          break;
+        }
+      }
+
+      applyActiveState(current?.id ?? null);
+    };
+
+    const setScrolledState = () => {
+      if (!nav) return;
+      nav.classList.toggle('is-scrolled', window.scrollY > 12);
+    };
+
+    const onScroll = () => {
+      setScrolledState();
+      setActiveLink();
+    };
+
+    const onNavClick = (event) => {
+      const target = event.currentTarget;
+      if (!(target instanceof HTMLAnchorElement)) return;
+      const id = target.getAttribute('href')?.slice(1);
+      if (!id) return;
+      applyActiveState(id);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('hashchange', setActiveLink);
+
+    for (const link of navLinks) {
+      link.addEventListener('click', onNavClick);
+    }
+  };
+
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupNavbarScrollSpy, { once: true });
+  } else {
+    setupNavbarScrollSpy();
+  }
+</script>

@@ -1,23 +1,44 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!doctype html>
+<html lang="es" data-theme="b" data-mode="dark" data-lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Joan Blanco | Fullstack Web Developer</title>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.dataset.theme = 'b';
+
+        const savedMode = localStorage.getItem('mode');
+        if (savedMode === 'light' || savedMode === 'dark') {
+          root.dataset.mode = savedMode;
+        } else {
+          root.dataset.mode = 'dark';
+        }
+
+        window.toggleColorMode = () => {
+          const nextMode = root.dataset.mode === 'light' ? 'dark' : 'light';
+          root.dataset.mode = nextMode;
+          localStorage.setItem('mode', nextMode);
+        };
+      })();
+    </script>
+
+    <script>
+      import { initI18n } from '../scripts/i18n';
+      import { translations } from '../constants/translations';
+
+      initI18n(translations);
+    </script>
+  </body>
+</html>

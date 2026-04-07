@@ -1,0 +1,135 @@
+---
+import { profile } from "../../data/portfolio";
+import { SocialLinks } from "../ui/SocialLinks";
+import { GitHubIcon } from "../icons/GitHubIcon";
+import { LinkedInIcon } from "../icons/LinkedinIcon";
+---
+
+<section
+  id="contact"
+  aria-label="Contacto"
+  data-i18n-aria="contact.aria"
+  class="container-section mt-14 min-h-[30svh] pb-16"
+>
+  <h2 class="section-heading font-extrabold" data-i18n="contact.title">
+    Contacto
+  </h2>
+  <p class="section-subtext mt-2" data-i18n="contact.subtitle">
+    Contáctame para discutir oportunidades de colaboración, proyectos o
+    simplemente para conectar.
+  </p>
+
+  <article class="card-surface animate-fade-up mt-8 w-full max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+      <button
+        id="copy-email-btn"
+        type="button"
+        class="btn-primary flex justify-center items-center w-full"
+        aria-label="Copiar correo electrónico"
+        data-i18n-aria="contact.copy.aria"
+      >
+        <span aria-hidden="true">✉️</span>
+        <span data-i18n="contact.copy">Copiar correo</span>
+      </button>
+
+      <button
+        id="open-email-btn"
+        type="button"
+        class="btn-outline flex justify-center items-center w-full"
+        aria-label="Abrir cliente de correo"
+        data-i18n-aria="contact.send.aria"
+      >
+        <span aria-hidden="true">↗</span>
+        <span data-i18n="contact.send">Enviar correo</span>
+      </button>
+
+      <SocialLinks
+        href={profile.linkedin}
+        ariaLabel="Abrir LinkedIn de Joan Blanco"
+        ariaLabelI18n="contact.linkedin.aria"
+        title="LinkedIn"
+        titleI18n="contact.linkedin"
+        variant="outline"
+        className="w-full"
+      >
+        <LinkedInIcon />
+      </SocialLinks>
+
+      <SocialLinks
+        href={profile.github}
+        ariaLabel="Abrir GitHub de Joan Blanco"
+        ariaLabelI18n="contact.github.aria"
+        title="GitHub"
+        titleI18n="contact.github"
+        variant="outline"
+        className="w-full"
+      >
+        <GitHubIcon />
+      </SocialLinks>
+    </div>
+    <p id="contact-email-status" class="sr-only" aria-live="polite"></p>
+  </article>
+</section>
+
+<script is:inline>
+  const getT = () => {
+    const lang = document.documentElement.lang || "es";
+    return window.i18next?.getFixedT
+      ? window.i18next.getFixedT(lang)
+      : (k, d) => d || k;
+  };
+
+  const encodedEmail = "am9hbmJsYW5jby5kZXZAZ21haWwuY29t";
+  const copyBtn = document.getElementById("copy-email-btn");
+  const openBtn = document.getElementById("open-email-btn");
+  const status = document.getElementById("contact-email-status");
+
+  const getEmail = () => {
+    try {
+      return window.atob(encodedEmail);
+    } catch {
+      return "";
+    }
+  };
+
+  const announce = (message) => {
+    if (status) status.textContent = message;
+  };
+
+  if (copyBtn instanceof HTMLButtonElement) {
+    copyBtn.addEventListener("click", async () => {
+      const t = getT();
+      const email = getEmail();
+      if (!email) {
+        announce(t("contact.email.decode.error", "No se pudo obtener el correo."));
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(email);
+        copyBtn.innerHTML = `<span aria-hidden="true">✅</span> ${t("contact.copy.success", "Correo copiado")}`;
+        announce(t("contact.copy.status", "Correo copiado al portapapeles."));
+        window.setTimeout(() => {
+          const tCurrent = getT();
+          copyBtn.innerHTML = `<span aria-hidden=\"true\">✉️</span> <span data-i18n=\"contact.copy\">${tCurrent('contact.copy', 'Copiar correo')}</span>`;
+          if (window.applyLanguage) window.applyLanguage();
+        }, 1400);
+      } catch {
+        announce(t("contact.copy.error", "No se pudo copiar el correo."));
+      }
+    });
+  }
+
+  if (openBtn instanceof HTMLButtonElement) {
+    openBtn.addEventListener("click", () => {
+      const t = getT();
+      const email = getEmail();
+      if (!email) {
+        announce(t("contact.send.error", "No se pudo abrir el correo."));
+        return;
+      }
+
+      window.location.href = `mailto:${email}`;
+    });
+  }
+</script>

@@ -1,0 +1,17 @@
+---
+import { projects } from '../../data/portfolio';
+import MotionProjectCard from '../islands/MotionProjectCard';
+---
+
+<section id="projects" aria-label="Proyectos" data-i18n-aria="projects.aria" class="container-section mt-10">
+  <h2 class="section-heading font-extrabold" data-i18n="nav.projects">Proyectos</h2>
+  <p class="section-subtext mt-2" data-i18n="projects.subtitle">
+    Selección curada con enfoque en problema real, solución técnica y stack utilizado.
+  </p>
+
+  <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+    {projects.map((project, index) => (
+      <MotionProjectCard client:visible project={project} index={index} />
+    ))}
+  </div>
+</section>

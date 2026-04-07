@@ -1,0 +1,258 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+:root {
+  --navbar-space: 6rem;
+  --color-bg: #0b1020;
+  --color-surface: #111827;
+  --color-primary: #60a5fa;
+  --color-secondary: #6366f1;
+  --color-text-high: #e5e7eb;
+  --color-text-low: #9ca3af;
+
+  --button-text: #001018;
+  --card-bg: color-mix(in oklab, var(--color-surface) 88%, black 12%);
+  --card-border: color-mix(in oklab, var(--color-text-low) 18%, transparent);
+  --shadow-color: rgb(2 6 23 / 0.18);
+  --glass-bg: rgb(15 23 42 / 0.55);
+  --glass-border: rgb(148 163 184 / 0.18);
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  color-scheme: dark;
+
+  /* Custom for InteractiveSidebar */
+  --color-accent: var(--color-primary);
+  /* max-h-150 = 600px (Tailwind default scale: 150*4px) */
+  --max-h-150: 600px;
+}
+
+/*
+  Contraparte light del Tema B.
+  Se activa cuando el html tenga data-mode="light".
+*/
+@theme {
+  --color-primary: #60a5fa;
+  --color-secondary: #6366f1;
+  --color-bg: #0b1020;
+  /* Custom for InteractiveSidebar */
+  --bg-bg: var(--color-bg);
+  --color-accent: var(--color-primary);
+  --max-h-150: 600px;
+}
+:root[data-mode="light"] {
+  --color-bg: #f6f8fc;
+  --color-surface: #ffffff;
+  --color-primary: #3b82f6;
+  --color-secondary: #4f46e5;
+  --color-text-high: #111827;
+  --color-text-low: #4b5563;
+
+  --button-text: #f8fafc;
+  --card-bg: color-mix(in oklab, var(--color-surface) 92%, #eef2ff 8%);
+  --card-border: color-mix(in oklab, var(--color-text-low) 16%, transparent);
+  --shadow-color: rgb(15 23 42 / 0.08);
+  --glass-bg: rgb(255 255 255 / 0.68);
+  --glass-border: rgb(71 85 105 / 0.14);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--navbar-space) + 1rem);
+}
+
+.navbar-shell {
+  height: var(--navbar-space);
+}
+
+.hero-screen-offset {
+  min-height: calc(100svh - var(--navbar-space));
+}
+
+@media (min-width: 768px) {
+  :root {
+    --navbar-space: 7rem;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text-high);
+  font-family: var(--font-sans);
+}
+
+/* Base para secciones: ancho consistente y espaciado vertical global */
+.container-section {
+  width: min(1120px, 80%);
+  margin-inline: auto;
+  padding-block: 2rem;
+}
+/* Base para títulos de sección: mantiene jerarquía visual uniforme */
+.section-heading {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.6rem, 2rem + 1.2vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Base para texto secundario: descripciones y copy de apoyo */
+.section-subtext {
+  margin: 0;
+  max-width: 80ch;
+  color: var(--color-text-low);
+}
+
+/* Base para cards: superficie, borde sutil y sombra ligera */
+.card-surface {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* Base para botón primario: CTA principal con foco accesible */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 0.75rem;
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--button-text);
+  background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 0.75rem;
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #f8fafc;
+  background: transparent;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.btn-outline:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+.btn-outline:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Base para efecto glass: navbar y elementos flotantes */
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  border-radius: 5rem;
+  padding: 1rem 4rem;
+
+}
+
+.navbar-fixed {
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.navbar-fixed.is-scrolled {
+  background: color-mix(in oklab, var(--glass-bg) 68%, var(--color-bg) 32%);
+  border-color: color-mix(in oklab, var(--glass-border) 75%, var(--color-primary) 25%);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* Respeta accesibilidad reduciendo animaciones cuando el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* NavLinks interactivos */
+nav .nav-link {
+  position: relative;
+}
+
+nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+nav .nav-link:hover::after {
+  width: 100%;
+}
+
+nav .nav-link.is-active {
+  color: var(--color-primary);
+}
+
+nav .nav-link.is-active::after {
+  width: 100%;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-down {
+  animation: fadeDown 500ms ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 500ms ease-out both;
+}

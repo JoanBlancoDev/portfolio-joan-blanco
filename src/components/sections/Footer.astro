@@ -1,0 +1,36 @@
+---
+import { profile } from '../../data/portfolio';
+import { SocialLinks } from '../ui/SocialLinks';
+import { GitHubIcon } from '../icons/GitHubIcon';
+import { LinkedInIcon } from '../icons/LinkedinIcon';
+---
+
+<footer aria-label="Pie de página" data-i18n-aria="footer.aria" class="container-section mt-4 text-center">
+  <div class="w-full flex justify-center items-center flex-wrap gap-4 md:gap-8 my-4">
+    <SocialLinks
+      href={profile.linkedin}
+      ariaLabel="Abrir LinkedIn de Joan Blanco"
+      ariaLabelI18n="footer.linkedin.aria"
+      title="LinkedIn"
+      titleI18n="footer.linkedin"
+
+      variant="outline"
+      className='w'
+    >
+      <LinkedInIcon />
+    </SocialLinks>
+
+    <SocialLinks
+      href={profile.github}
+      ariaLabel="Abrir GitHub de Joan Blanco"
+      ariaLabelI18n="footer.github.aria"
+      title="GitHub"
+      titleI18n="footer.github"
+
+      variant="outline"
+    >
+      <GitHubIcon />
+    </SocialLinks>
+  </div>
+  <p aria-label="Copyright" data-i18n-aria="footer.copyright.aria" data-i18n="footer.copyright"></p>
+</footer>
