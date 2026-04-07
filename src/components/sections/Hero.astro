@@ -2,5 +2,6 @@
 import {HeroSectionAnimated} from '../islands/HeroSectionAnimated'
 
 ---
-<HeroSectionAnimated client:visible/>
+<!-- client:load: El Hero es el elemento LCP, debe hidratarse inmediatamente -->
+<HeroSectionAnimated client:load />
 

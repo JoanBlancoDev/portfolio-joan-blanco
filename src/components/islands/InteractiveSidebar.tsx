@@ -1,8 +1,48 @@
-import { Menu, X } from 'lucide-react'
+// ✅ NO más lucide-react (959 KiB) — reemplazado con SVGs inline mínimos
+// ✅ NO más framer-motion (bundle duplicado) — usando motion/react unificado
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next';
 import '../../scripts/i18n-react';
+
+// SVG inline del ícono Menu (hamburguesa) — 0 KB de dependencia externa
+const MenuIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <line x1="4" y1="6" x2="20" y2="6" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+    <line x1="4" y1="18" x2="20" y2="18" />
+  </svg>
+);
+
+// SVG inline del ícono X (cerrar) — 0 KB de dependencia externa
+const CloseIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
 
 interface Props {
     links?: { href: string, label: string, i18nKey: string }[];
@@ -18,7 +58,6 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
         setIsHydrated(true);
     }, []);
     const canTranslate = isHydrated && i18n.isInitialized;
-
 
     // Traducción accesible para aria-label
     const ariaLabel = canTranslate
@@ -47,7 +86,7 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                     transition={{ duration: 0.3 }}
                     style={{ display: 'inline-flex' }}
                 >
-                    {isActive ? <X size={28} /> : <Menu size={28} />}
+                    {isActive ? <CloseIcon /> : <MenuIcon />}
                 </motion.span>
             </motion.button>
 

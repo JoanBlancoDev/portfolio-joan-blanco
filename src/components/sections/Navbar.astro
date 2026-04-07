@@ -39,7 +39,8 @@ const links = [
       </button>
     </div>
     <!-- Toggle Sidebar -->
-    <InteractiveSidebar client:visible links={links}  />
+    <!-- client:idle: sidebar móvil, no crítico para el render inicial -->
+    <InteractiveSidebar client:idle links={links} />
 
   </nav>
 </header>
