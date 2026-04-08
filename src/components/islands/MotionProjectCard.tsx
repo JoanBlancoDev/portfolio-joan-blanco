@@ -27,6 +27,7 @@ export default function MotionProjectCard({ project, index }: MotionProjectCardP
   }, []);
 
   const canRenderTranslations = isHydrated && canTranslate;
+  const currentLang = canRenderTranslations ? lang : 'es';
   const hasLiveDemo = project.link && project.link !== '#';
   const hasRepo = project.github && project.github !== '#';
 
@@ -48,9 +49,9 @@ export default function MotionProjectCard({ project, index }: MotionProjectCardP
 
       <div className="relative z-10">
         <p className="text-xs font-mono text-(--color-text-low)">{canRenderTranslations ? t('projects.card.projectNumber', 'Proyecto') : 'Proyecto'} {String(index + 1).padStart(2, '0')}</p>
-        <h3 className="mt-2 text-xl font-bold leading-tight">{project.title[lang]}</h3>
-        <p className="mt-2 text-sm md:text-base text-(--color-text-low)">{project.tagline[lang]}</p>
-        <p className="mt-4 leading-relaxed text-(--color-text-high)/90">{project.description[lang]}</p>
+      <h3 className="mt-2 text-xl font-bold leading-tight">{project.title[currentLang]}</h3>
+      <p className="mt-2 text-sm md:text-base text-(--color-text-low)">{project.tagline[currentLang]}</p>
+      <p className="mt-4 leading-relaxed text-(--color-text-high)/90">{project.description[currentLang]}</p>
 
         <ul className="mt-5 flex flex-wrap gap-2">
           {project.stack.map((tech) => (

@@ -1,6 +1,4 @@
 ---
-import { HeroSecondaryTypewriter } from '../islands/HeroSecondaryTypewriter';
-import { secondaryParagraph } from '../../constants/typewriter';
 import { profile } from '../../data/portfolio';
 ---
 
@@ -26,18 +24,14 @@ import { profile } from '../../data/portfolio';
       {profile.role.es}
     </p>
 
-    <div class="hero-reveal hero-reveal-4 w-full flex justify-center">
-      <HeroSecondaryTypewriter
-        client:idle
-        wordsEs={secondaryParagraph.es}
-        wordsEn={secondaryParagraph.en}
-      />
-    </div>
+    <p class="hero-reveal hero-reveal-4 text-body-muted md:text-base font-mono min-h-6 text-sm" data-i18n="hero.typewriterSecondary.0">
+      &gt; Construyendo soluciones reales.
+    </p>
   </div>
 
   <div class="hero-reveal hero-reveal-5 flex flex-wrap justify-center items-center gap-8 mt-16 md:mt-20">
     <a href="#projects" class="btn-primary text-center" data-i18n="hero.cta.projects">Ver Proyectos</a>
-    <button type="button" class="btn-outline" data-i18n="hero.cta.cv">Descargar CV</button>
+    <a href={profile.cv} target="_blank" rel="noopener noreferrer" class="btn-outline" data-i18n="hero.cta.cv">Descargar CV</a>
   </div>
 
   <div class="hero-reveal hero-reveal-6 mt-30 w-full flex justify-center items-center gap-4 md:gap-8">

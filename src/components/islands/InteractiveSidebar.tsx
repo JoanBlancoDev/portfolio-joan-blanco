@@ -120,7 +120,7 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
               <li key={link.href} className="mobile-nav-link-stagger">
                 <a
                   href={link.href}
-                  className="text-2xl font-semibold transition-colors duration-200 hover:text-[var(--color-accent)]"
+                  className="text-2xl font-semibold transition-colors duration-200 hover:accent"
                   style={{ color: 'var(--color-text-high)' }}
                   data-i18n={link.i18nKey}
                   onClick={() => setIsActive(false)}

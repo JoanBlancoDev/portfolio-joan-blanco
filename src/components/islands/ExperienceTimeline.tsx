@@ -6,7 +6,8 @@ import MotionProvider from '../ui/MotionProvider';
 
 export default function ExperienceTimeline() {
   const prefersReducedMotion = useReducedMotion();
-  const { lang } = useAppTranslation();
+  const { lang, canTranslate } = useAppTranslation();
+  const currentLang = canTranslate ? lang : 'es';
 
   return (
     <MotionProvider>
@@ -37,20 +38,20 @@ export default function ExperienceTimeline() {
             >
               <span
                 aria-hidden="true"
-                className="absolute left-0 top-2 h-4 w-4 rounded-full border-2 border-primary bg-(--color-bg) shadow-[0_0_0_3px_color-mix(in_oklab,var(--color-primary)_24%,transparent)]"
+                className="absolute left-0 top-2 h-4 w-4 rounded-full border-2 border-primary bg-bg shadow-[0_0_0_3px_color-mix(in_oklab,var(--color-primary)_24%,transparent)]"
               />
 
               <article className="card-surface">
                 <header className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold">{item.role[lang]}</h3>
+                    <h3 className="text-lg font-semibold">{item.role[currentLang]}</h3>
                     <p className="text-sm text-(--color-text-low)">{item.company}</p>
                   </div>
-                  <p className="text-xs md:text-sm font-mono text-primary">{item.period[lang]}</p>
+                  <p className="text-xs md:text-sm font-mono text-primary">{item.period[currentLang]}</p>
                 </header>
 
                 <ul className="mt-4 space-y-2">
-                  {item.description[lang].map((achievement) => (
+                  {item.description[currentLang].map((achievement) => (
                     <li key={achievement} className="text-sm md:text-base leading-relaxed text-(--color-text-high)/90">
                       <span className="mr-2 text-primary">▹</span>
                       {achievement}
