@@ -22,10 +22,10 @@ export default defineConfig({
             if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
               return 'react-vendor';
             }
-            if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
+            if (id.includes('node_modules/motion')) {
               return 'motion-vendor';
             }
-            if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) {
+            if (id.includes('node_modules/i18next')) {
               return 'i18n-vendor';
             }
           },
@@ -36,7 +36,7 @@ export default defineConfig({
     },
     // Enable dependency pre-bundling optimizations
     optimizeDeps: {
-      include: ['react', 'react-dom', 'motion/react', 'i18next', 'react-i18next'],
+      include: ['react', 'react-dom', 'motion/react', 'i18next'],
     },
   },
 });

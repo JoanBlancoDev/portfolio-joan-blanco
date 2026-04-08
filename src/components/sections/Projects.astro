@@ -11,8 +11,8 @@ import MotionProjectCard from '../islands/MotionProjectCard';
 
   <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
     {projects.map((project, index) => (
-      <!-- client:idle: tarjetas siempre debajo del fold, no bloquear thread inicial -->
-      <MotionProjectCard client:idle project={project} index={index} />
+      <!-- client:visible: hidrata cada tarjeta cuando entra al viewport -->
+      <MotionProjectCard client:visible project={project} index={index} />
     ))}
   </div>
 </section>

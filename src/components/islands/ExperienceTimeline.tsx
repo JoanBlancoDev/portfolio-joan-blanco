@@ -1,21 +1,12 @@
 import React from 'react';
-import { m, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from '../../lib/motion';
 import { experience } from '../../data/portfolio';
-import { useTranslation } from 'react-i18next';
-import '../../scripts/i18n-react';
-import { useEffect, useState } from 'react';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 import MotionProvider from '../ui/MotionProvider';
 
 export default function ExperienceTimeline() {
   const prefersReducedMotion = useReducedMotion();
-  const { i18n } = useTranslation();
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  const lang = isHydrated && i18n.language?.startsWith('en') ? 'en' : 'es';
+  const { lang } = useAppTranslation();
 
   return (
     <MotionProvider>

@@ -1,9 +1,7 @@
-// ✅ NO más lucide-react (959 KiB) — reemplazado con SVGs inline mínimos
-// ✅ NO más framer-motion (bundle duplicado) — usando motion/react unificado
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import { useTranslation } from 'react-i18next';
-import '../../scripts/i18n-react';
+import { m, AnimatePresence } from '../../lib/motion'
+import MotionProvider from '../ui/MotionProvider';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 
 // SVG inline del ícono Menu (hamburguesa) — 0 KB de dependencia externa
 const MenuIcon = () => (
@@ -52,15 +50,15 @@ interface Props {
 
 export const InteractiveSidebar = ({ links = [], className = '', btnClassName = '' }: Props) => {
     const [isActive, setIsActive] = useState(false);
-    const { t, i18n } = useTranslation();
+    const { t, canTranslate } = useAppTranslation();
     const [isHydrated, setIsHydrated] = useState(false);
     useEffect(() => {
         setIsHydrated(true);
     }, []);
-    const canTranslate = isHydrated && i18n.isInitialized;
+    const canRenderTranslations = isHydrated && canTranslate;
 
     // Traducción accesible para aria-label
-    const ariaLabel = canTranslate
+    const ariaLabel = canRenderTranslations
         ? isActive
             ? t('sidebar.closeMenu', 'Cerrar menú de navegación')
             : t('sidebar.openMenu', 'Abrir menú de navegación')
@@ -69,8 +67,8 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
             : 'Abrir menú de navegación';
 
     return (
-        <>
-            <motion.button
+        <MotionProvider>
+            <m.button
                 onClick={() => setIsActive(!isActive)}
                 className={`lg:hidden ${btnClassName} z-20  self-center flex items-center justify-center`}
                 aria-label={ariaLabel}
@@ -78,7 +76,7 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                 animate={{ rotate: isActive ? 90 : 0, scale: isActive ? 1.1 : 1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
-                <motion.span
+                <m.span
                     key={isActive ? 'x' : 'menu'}
                     initial={{ opacity: 0, scale: 0.7, rotate: -90 }}
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -87,12 +85,12 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                     style={{ display: 'inline-flex' }}
                 >
                     {isActive ? <CloseIcon /> : <MenuIcon />}
-                </motion.span>
-            </motion.button>
+                </m.span>
+            </m.button>
 
             <AnimatePresence>
                 {isActive && (
-                    <motion.aside
+                    <m.aside
                         key="sidebar"
                         initial={{ y: -600, opacity: 0, clipPath: 'circle(0% at 50% 0%)' }}
                         animate={{ y: 0, opacity: 1, clipPath: 'circle(120% at 50% 0%)' }}
@@ -107,7 +105,7 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                             maxHeight: 'var(--max-h-150)'
                         }}
                     >
-                        <motion.ul
+                        <m.ul
                             initial="closed"
                             animate="open"
                             variants={{
@@ -117,7 +115,7 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                             className="w-full flex flex-col items-center gap-6"
                         >
                             {links.map((link) => (
-                                <motion.li
+                                <m.li
                                     key={link.href}
                                     variants={{
                                         open: { opacity: 1, y: 0 },
@@ -134,14 +132,14 @@ export const InteractiveSidebar = ({ links = [], className = '', btnClassName = 
                                         onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-high)')}
                                         onClick={() => setIsActive(false)}
                                     >
-                                        {canTranslate ? t(link.i18nKey) : link.label}
+                                        {canRenderTranslations ? t(link.i18nKey, link.label) : link.label}
                                     </a>
-                                </motion.li>
+                                </m.li>
                             ))}
-                        </motion.ul>
-                    </motion.aside>
+                        </m.ul>
+                    </m.aside>
                 )}
             </AnimatePresence>
-        </>
+        </MotionProvider>
     );
 }

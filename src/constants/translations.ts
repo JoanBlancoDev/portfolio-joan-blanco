@@ -84,7 +84,7 @@ export const translations = {
     'hero.hello': 'Hello World!',
     'hero.role': 'Fullstack Web Developer',
     'hero.cta.projects': 'View Projects',
-    'hero.cta.cv': 'Download Resume',
+    'hero.cta.cv': 'Download CV',
     'hero.linkedin.aria': 'Open Joan Blanco LinkedIn',
     'hero.github.aria': 'Open Joan Blanco GitHub',
     'hero.typewriterPrincipal': "Joan Blanco",
