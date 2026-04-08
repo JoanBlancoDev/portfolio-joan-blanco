@@ -129,6 +129,32 @@ section[id] {
 .hero-reveal-6 {
   animation-delay: 0.36s;
 }
+.hero-typewriter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.16rem;
+}
+
+.hero-typewriter-caret {
+  color: var(--color-primary);
+  opacity: 0;
+}
+
+.hero-typewriter.is-typing .hero-typewriter-caret {
+  opacity: 1;
+  animation: hero-caret-blink 0.8s steps(1, end) infinite;
+}
+
+@keyframes hero-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
 
 @media (min-width: 768px) {
   :root {
@@ -362,6 +388,11 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .hero-typewriter.is-typing .hero-typewriter-caret {
+    animation: none !important;
+    opacity: 0;
   }
 }
 
