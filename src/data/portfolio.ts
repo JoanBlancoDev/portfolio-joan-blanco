@@ -66,8 +66,8 @@ export const projects = [
       en: 'Professional mobile-first portfolio with Astro, Motion animations, and reusable components focused on performance and UX.',
     } as LocalizedText,
     stack: ['Astro', 'React 19', 'Motion', 'Tailwind CSS'],
-    link: '#',
-    github: 'https://github.com/JoanBlancoDev',
+    link: 'https://portfolio-joan-blanco.vercel.app/',
+    github: 'https://github.com/JoanBlancoDev/portfolio-joan-blanco',
   },
   {
     title: {
