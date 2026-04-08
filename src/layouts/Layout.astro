@@ -51,6 +51,13 @@ const {
       href="/fonts/inter-variable.woff2"
       crossorigin="anonymous"
     />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/jetbrains-mono-variable.woff2"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <slot />
@@ -71,14 +78,17 @@ const {
           root.dataset.mode = nextMode;
           localStorage.setItem('mode', nextMode);
         };
+
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang === 'en' || savedLang === 'es') {
+          root.dataset.lang = savedLang;
+          root.lang = savedLang === 'en' ? 'en' : 'es';
+        }
       })();
     </script>
 
     <script>
-      import { initI18n } from '../scripts/i18n';
-      import { translations } from '../constants/translations';
-
-      initI18n(translations);
+      import '../scripts/i18n-scheduler';
     </script>
   </body>
 </html>

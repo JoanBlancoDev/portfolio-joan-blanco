@@ -1,4 +1,5 @@
-import React from 'react'
+import type { ReactNode } from 'react';
+
 interface SocialLinksProps {
   title?: string;
   titleI18n?: string;
@@ -6,24 +7,29 @@ interface SocialLinksProps {
   className?: string;
   ariaLabel?: string;
   ariaLabelI18n?: string;
-  icon?: React.ReactNode | string;
-  children?: React.ReactNode;
-  variant ?: 'primary' | 'outline';
-  isMailto ?: boolean;
+  children?: ReactNode;
+  variant?: 'primary' | 'outline';
 }
-export const SocialLinks = ({title, titleI18n, href, className, ariaLabel, ariaLabelI18n, icon, children, variant, isMailto}: SocialLinksProps) => {
-  return (
-     <a
-        href={isMailto ? `mailto:${href}` : href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${className ?? ''} btn-${variant || 'primary'}`.trim()}
-        aria-label={ariaLabel}
-        data-i18n-aria={ariaLabelI18n}
-      >
-        {children ?? icon}
 
-        {titleI18n ? <span data-i18n={titleI18n}>{title || ''}</span> : (title || "")}
-      </a>
-  )
-}
+export const SocialLinks = ({
+  title,
+  titleI18n,
+  href,
+  className,
+  ariaLabel,
+  ariaLabelI18n,
+  children,
+  variant = 'primary',
+}: SocialLinksProps) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`${className ?? ''} btn-${variant}`.trim()}
+    aria-label={ariaLabel}
+    data-i18n-aria={ariaLabelI18n}
+  >
+    {children}
+    {titleI18n ? <span data-i18n={titleI18n}>{title ?? ''}</span> : (title ?? '')}
+  </a>
+);

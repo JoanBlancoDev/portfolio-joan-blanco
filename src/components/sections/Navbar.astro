@@ -38,9 +38,8 @@ const links = [
         EN
       </button>
     </div>
-    <!-- Toggle Sidebar -->
-    <!-- client:idle: sidebar móvil, no crítico para el render inicial -->
-    <InteractiveSidebar client:idle links={links} />
+    <!-- Solo <lg: hidrata el drawer; en desktop no se descarga este island (menos cadena crítica). -->
+    <InteractiveSidebar client:media="(max-width: 1023px)" links={links} />
 
   </nav>
 </header>

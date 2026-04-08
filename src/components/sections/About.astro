@@ -1,5 +1,4 @@
 ---
-// TODO: Resumen profesional centrado en resolución de problemas
 import memojiVideo from "../../assets/memoji.webm";
 import { profile } from "../../data/portfolio";
 ---
@@ -12,22 +11,19 @@ import { profile } from "../../data/portfolio";
 >
   <article class="flex-2">
     <h2 data-i18n="nav.about" class="section-heading font-extrabold">Sobre Mí</h2>
-    <p data-i18n="about.summary" class="text-pretty font-light leading-relaxed text-normal md:text-xl mt-8">
+    <p data-i18n="about.summary" class="text-pretty mt-8 text-base font-light leading-relaxed md:text-xl">
       {profile.summary.es}
     </p>
   </article>
 
   <div class="flex flex-1 justify-center items-center" aria-hidden="true">
   <div class="relative group">
-    
-    {/* 1. Resplandor de fondo usando tu --color-primary */}
-    <div 
-      class="absolute -inset-4 rounded-full opacity-20 blur-2xl transition duration-1000 group-hover:opacity-40 group-hover:duration-500 pointer-events-none"
+    <div
+      class="pointer-events-none absolute -inset-4 rounded-full opacity-20 blur-2xl transition duration-1000 group-hover:opacity-40 group-hover:duration-500"
       style="background: var(--color-primary);"
     ></div>
 
-    {/* 2. Contenedor del video con borde de tu paleta */}
-    <div class="relative rounded-full p-1 border border-(--glass-border) bg-(--card-bg) shadow-2xl overflow-hidden">
+    <div class="relative overflow-hidden rounded-full border border-(--glass-border) bg-(--card-bg) p-1 shadow-2xl">
       
       <video
         id="about-memoji-video"
@@ -41,9 +37,8 @@ import { profile } from "../../data/portfolio";
         <source src={memojiVideo} type="video/webm" />
       </video>
 
-      {/* 3. El "Velo" de Integración (Opcional si aún ves un borde) */}
-      <div 
-        class="absolute inset-0 rounded-full pointer-events-none"
+      <div
+        class="pointer-events-none absolute inset-0 rounded-full"
         style="background: radial-gradient(circle, transparent 50%, var(--color-bg) 100%);"
       ></div>
     </div>

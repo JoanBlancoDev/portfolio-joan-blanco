@@ -1,7 +1,99 @@
 ---
-import {HeroSectionAnimated} from '../islands/HeroSectionAnimated'
-
+import { HeroSecondaryTypewriter } from '../islands/HeroSecondaryTypewriter';
+import { secondaryParagraph } from '../../constants/typewriter';
+import { profile } from '../../data/portfolio';
 ---
-<!-- client:idle: mantiene SSR inmediato y difiere JS no crítico -->
-<HeroSectionAnimated client:idle />
 
+<section
+  id="hero"
+  aria-label="Hero"
+  data-i18n-aria="hero.aria"
+  class="hero-screen-offset container-section flex flex-col justify-center items-center"
+>
+  <div class="flex flex-col gap-3 justify-center items-center text-center">
+    <p class="hero-reveal hero-reveal-1 text-body-muted font-mono text-sm md:text-base" data-i18n="hero.hello">
+      ¡Hola Mundo!
+    </p>
+
+    <h1
+      class="hero-reveal hero-reveal-2 min-h-14 text-balance leading-tight text-5xl md:text-6xl font-extrabold"
+      data-i18n="hero.typewriterPrincipal"
+    >
+      Joan Blanco
+    </h1>
+
+    <p class="hero-reveal hero-reveal-3 text-lg md:text-2xl" data-i18n="hero.role">
+      {profile.role.es}
+    </p>
+
+    <div class="hero-reveal hero-reveal-4 w-full flex justify-center">
+      <HeroSecondaryTypewriter
+        client:idle
+        wordsEs={secondaryParagraph.es}
+        wordsEn={secondaryParagraph.en}
+      />
+    </div>
+  </div>
+
+  <div class="hero-reveal hero-reveal-5 flex flex-wrap justify-center items-center gap-8 mt-16 md:mt-20">
+    <a href="#projects" class="btn-primary text-center" data-i18n="hero.cta.projects">Ver Proyectos</a>
+    <button type="button" class="btn-outline" data-i18n="hero.cta.cv">Descargar CV</button>
+  </div>
+
+  <div class="hero-reveal hero-reveal-6 mt-30 w-full flex justify-center items-center gap-4 md:gap-8">
+    <a
+      href={profile.linkedin}
+      class="btn-outline w"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir LinkedIn de Joan Blanco"
+      data-i18n-aria="hero.linkedin.aria"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin"
+        aria-hidden="true"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M8 11v5"></path><path d="M8 8v.01"
+        ></path><path d="M12 16v-5"></path><path d="M16 16v-3a2 2 0 1 0 -4 0"></path><path
+          d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"
+        ></path></svg
+      >
+    </a>
+
+    <a
+      href={profile.github}
+      class="btn-outline"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir GitHub de Joan Blanco"
+      data-i18n-aria="hero.github.aria"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"
+        aria-hidden="true"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</section>

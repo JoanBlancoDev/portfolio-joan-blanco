@@ -5,9 +5,14 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   integrations: [react()],
+  /** `ASTRO_DEV_TOOLBAR=0 bun dev` para Lighthouse sin scripts del toolbar */
+  devToolbar: {
+    enabled: process.env.ASTRO_DEV_TOOLBAR !== '0',
+  },
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    /** Inline CSS en el HTML: evita solicitud bloqueante en el critical path (LCP/FCP). */
+    inlineStylesheets: 'always',
   },
   vite: {
     plugins: [tailwindcss()],

@@ -37,7 +37,7 @@ export default function ExperienceTimeline() {
             >
               <span
                 aria-hidden="true"
-                className="absolute left-0 top-2 h-4 w-4 rounded-full border-2 border-primary bg-bg shadow-[0_0_0_3px_color-mix(in_oklab,var(--color-primary)_24%,transparent)]"
+                className="absolute left-0 top-2 h-4 w-4 rounded-full border-2 border-primary bg-(--color-bg) shadow-[0_0_0_3px_color-mix(in_oklab,var(--color-primary)_24%,transparent)]"
               />
 
               <article className="card-surface">

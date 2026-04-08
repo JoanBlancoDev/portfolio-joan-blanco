@@ -1,8 +1,3 @@
-export const principalParagraph = {
-  es: ['¡Joan Blanco!'],
-  en: ['Joan Blanco!'],
-} as const;
-
 export const secondaryParagraph = {
   es: [
     '> Construyendo soluciones reales.',
