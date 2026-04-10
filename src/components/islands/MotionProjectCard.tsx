@@ -66,7 +66,7 @@ export default function MotionProjectCard({ project, index }: MotionProjectCardP
 
         <div className="mt-6 flex flex-wrap gap-3">
           {hasLiveDemo ? (
-            <a href={project.link} target="_blank" rel="noreferrer" className="btn-primary">
+            <a href={project.link} target="_blank" rel="noreferrer" className="btn-primary w-full sm:w-auto">
               {canRenderTranslations ? t('projects.card.viewProject', 'Ver proyecto') : 'Ver proyecto'} <span aria-hidden="true">↗</span>
             </a>
           ) : (
@@ -76,7 +76,7 @@ export default function MotionProjectCard({ project, index }: MotionProjectCardP
           )}
 
           {hasRepo ? (
-            <a href={project.github} target="_blank" rel="noreferrer" className="btn-outline">
+            <a href={project.github} target="_blank" rel="noreferrer" className="btn-outline w-full sm:w-auto">
               {canRenderTranslations ? t('projects.card.code', 'Código') : 'Código'} <span aria-hidden="true">&lt;/&gt;</span>
             </a>
           ) : (

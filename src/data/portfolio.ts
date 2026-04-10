@@ -12,8 +12,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/joan-blanco-dev',
   cv: 'https://drive.google.com/drive/folders/18c2GRHP_ylddoXspB9NkhmYrY9paDJhW',
   summary: {
-    es: `Desarrollador Fullstack con dominio avanzado de JavaScript/TypeScript y capacidad para gestionar el ciclo de vida completo de aplicaciones web y móviles. Especializado en la construcción de arquitecturas eficientes con Next.js, Node.js y bases de datos SQL/NoSQL. Mi virtud principal es la mentalidad orientada a resultados, permitiéndome lanzar MVPs funcionales de forma acelerada sin sacrificar la estabilidad del sistema.`,
-    en: 'Fullstack developer with advanced proficiency in JavaScript/TypeScript and the ability to manage the entire lifecycle of web and mobile applications. Specialized in building efficient architectures with Next.js, Node.js, and SQL/NoSQL databases. My main virtue is a results-oriented mindset, allowing me to rapidly launch functional MVPs without sacrificing system stability.',
+    es: `Desarrollador Fullstack con dominio avanzado de JavaScript/TypeScript y capacidad para gestionar el ciclo de vida completo de aplicaciones web y móviles. Especializado en la construcción de arquitecturas eficientes con Next.js, Node.js y bases de datos SQL/NoSQL.\n\nMi virtud principal es la mentalidad orientada a resultados, permitiéndome lanzar MVPs funcionales de forma acelerada sin sacrificar la estabilidad del sistema.`,
+    en: 'Fullstack developer with advanced proficiency in JavaScript/TypeScript and the ability to manage the entire lifecycle of web and mobile applications. Specialized in building efficient architectures with Next.js, Node.js, and SQL/NoSQL databases.\n\nMy main virtue is a results-oriented mindset, allowing me to rapidly launch functional MVPs without sacrificing system stability.',
   } as LocalizedText,
 };
 
